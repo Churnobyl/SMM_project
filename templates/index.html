@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- meta data -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Share My Music" />
+  <meta property="og:description" content="내일배움캠프 시작 전 6조 첫번째 프로젝트" />
+  <meta property="og:image" content="이미지URL" />
+
+  <!-- 사이트 제목 -->
+  <title>Share My Music</title>
+
+  <!-- 부트스트랩, jQuery -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+
+  <!-- search icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!--    웹 브라우저 파비콘-->
+  <link rel="shortcut icon" type="image/x-icon" href="https://www.youtube.com/s/desktop/32c4e480/img/favicon_32x32.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+
+
+
+<style>
+  /* CSS */
+
+  /* Google Font - Roboto Mono, Dongle */
+  @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Roboto+Mono&display=swap');
+
+  /* 전체 영역에 Google Font적용 */
+  * {
+    font-family: 'Dongle', sans-serif;
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  a:hover {
+    color: white;
+  }
+
+  /* header css */
+  header {
+    width: 70%;
+    height: 70px;
+    background-color: black;
+    border-bottom: 1px solid #333;
+    box-shadow: 0 0 3px #444;
+    margin: 0 auto;
+  }
+
+  .header-logo {
+    display: block;
+    line-height: 70px;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    display: block;
+    margin-left: 20px;
+    text-decoration: none;
+    color: white;
+    float: left;
+  }
+
+  .header-btn {
+    display: block;
+    height: 20px;
+    right: 50px;
+    top: 50%;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    float: right;
+  }
+
+  .header-search {
+    display: block;
+    right: 250px;
+    top: 50%;
+    margin-top: 20px;
+    float: right;
+  }
+
+  #logo-img {
+    height: 50px;
+  }
+
+  /* header css end */
+
+
+  /* section css */
+  section {
+    width: 70%;
+    height: max-content;
+    margin: 0 auto;
+  }
+
+  .wrap {
+    width: 100%;
+    height: max-content;
+  }
+
+  .section {
+    width: 85%;
+    height: 820px;
+    margin: 0 auto 0 auto;
+    float: left;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title-cover {
+    width: 100%;
+  }
+
+  .card-title {
+    float: left;
+    width: 95%;
+  }
+
+  .artist-card {
+    float: left;
+    width: 100%;
+    height: 20px;
+    margin: 2px 0 0 2px;
+    color: #808080;
+    background-color: #FFF;
+    font-size: 17px;
+    line-height: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .mycards {
+    width: 90%;
+    margin: 30px auto;
+  }
+
+  .like-button {
+    width: 28px;
+    float: right;
+    display: block;
+    margin: 0 5px 10px 0;
+  }
+
+  .like-button:hover {
+    filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
+  }
+
+  .like {
+    float: right;
+    display: block;
+    margin: 0 10px 10px 0;
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    color: white;
+  }
+
+  .id_hide {
+    font-size: 0px;
+  }
+
+  /* section css end */
+
+
+  /* nav css */
+  .nav {
+    width: 15%;
+    height: 820px;
+  }
+
+  /*sidebar css*/
+  .sidebar {
+    background-color: black;
+    width: 100%;
+    right: 32%;
+    height: 430px;
+    margin-top: 3%;
+  }
+
+  .sidebar div {
+    padding: 6px;
+    display: block;
+    text-decoration: none;
+    padding-bottom: 6px;
+    text-align: center;
+  }
+
+  .sidebar_title {
+    margin-top: 5%;
+  }
+
+  .sidebar_content {
+    border-radius: 5px;
+    border: 5px double red;
+    margin: 0 5px 0 5px;
+  }
+
+  .sidebar a:hover {
+    cursor: pointer;
+    opacity: .7;
+  }
+
+  /* rank css */
+  .ranking_system {
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+    right: 32%;
+    height: 400px;
+    margin-top: 3%;
+  }
+
+  .rank_cover {
+    width: 100%;
+    height: 400px;
+    border: 2px solid black;
+    margin: 0 auto;
+  }
+
+  .rank_title {
+    background-color: black;
+    height: 40px;
+    text-align: center;
+  }
+
+  .rank_main {
+    height: 360px;
+  }
+
+  div.rank_list {
+    border: 1px black solid;
+    width: 100%;
+    height: 356px;
+    float: left;
+    display: inline;
+  }
+
+  .rank_each {
+
+    list-style: none;
+    height: 71px;
+    background-color: white;
+  }
+
+  .rank {
+    display: inline;
+    float: left;
+    width: 10%;
+    height: 70%;
+    margin: 9px 0 0 8px;
+    background-color: white;
+    color: grey;
+  }
+
+  .rank-top {
+    color: rgb(5, 175, 5);
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bolder;
+  }
+
+  .rank-top-one {
+    color: rgb(253, 53, 97);
+    font-size: 24px;
+    font-style: italic;
+    font-weight: bolder;
+  }
+
+  .song-cover {
+    display: block;
+    float: left;
+    width: 60%;
+    height: 70%;
+    margin: 9px 0 0 8px;
+  }
+
+  .song {
+    float: left;
+    width: 100%;
+    height: 14px;
+    margin: 5px 0 0 5px;
+    font-size: 14px;
+    line-height: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .artist {
+    float: left;
+    width: 100%;
+    height: 14px;
+    margin: 10px 0 0 2px;
+    color: #808080;
+    background-color: #FFF;
+    font-size: 13px;
+    line-height: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .chart-like-cover {
+    display: block;
+    float: left;
+    width: 20%;
+    height: 70%;
+    margin: 9px 0 0 0px;
+
+  }
+
+  .chart-like {
+    float: right;
+    display: block;
+    margin: 6px auto;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 24px;
+    height: 18px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+  }
+
+  .loading {
+    z-index: 99999;
+    position: relative;
+  }
+  
+  .youtubes {
+    z-index: 2000;
+  }
+
+  .youtube-cover {
+    float: left;
+    width:500px;
+    height:315px;
+  }
+
+  /* rank css end */
+
+  /* nav css end */
+</style>
+<script>
+  /* 쿠키 관련 코드 */
+
+  // 해당 이름의 쿠키를 삭제한다.
+  function delCookie(_name) {
+    var expireDate = new Date();
+
+    //어제 날짜를 쿠키 소멸 날짜로 설정한다.
+    expireDate.setDate(expireDate.getDate() - 1);
+    document.cookie = _name + "= " + "; expires=" + expireDate.toGMTString() + "; path=/";
+
+    alert(document.cookie);
+  }
+
+  // 이름, 값, 시간(초)로 쿠키를 생성한다.
+  function setCookie(_name, _value, _time) {
+    var cookie = _name + "=" + escape(_value) + "; path=/;"
+    if (typeof _date != 'undefined') {
+      var todayDate = new Date();
+      //todayDate.setDate(todayDate.getDate() + _date); // 날짜
+      todayDate.setTime(todayDate.getTime() + 60 * 1000 * _time); // 시간 (milli seconds)
+      cookie += "expires=" + todayDate.toGMTString() + ";"
+    }
+    document.cookie = cookie;
+
+    return 1
+  }
+
+
+  // 해당 이름의 쿠키를 확인한다.
+  function getCookie(_name) {
+    try {
+      var nameOfCookie = _name + "="; // 'test='
+      var x = 0;
+      while (x <= document.cookie.length) {
+        var y = (x + nameOfCookie.length); // 시작값 + 쿠키이름 길이
+        if (document.cookie.substring(x, y) == nameOfCookie) // _name과 일치하는 경우
+        {
+          if ((endOfCookie = document.cookie.indexOf(";", y)) == -1) // 구분자(;)를 못 찾은 경우
+            endOfCookie = document.cookie.length;
+          return alert("이미 추천을 하셨습니다");
+        }
+        x = document.cookie.indexOf(" ", x) + 1; // 쿠키 구분자로 이동 (; 후 공백)
+        if (x == 0) break; // 이후 다른 쿠키가 없는 경우 종료
+      }
+    }
+    catch (err) {
+      alert("getCookie[" + err.description + "]");
+    }
+    return 1
+  }
+
+  /* 쿠키 관련 코드 end */
+
+  /* 추천 버튼 */
+  $(document).on('click', '.like-button', function (event) {
+    let id = event.target.id;
+    if (getCookie(id) === 1) {
+      setCookie(id, "ok", 600);
+      let formData = new FormData();
+      formData.append("id_give", id);
+
+      fetch('/like', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
+        alert(data['msg'])
+        window.location.reload()
+      })
+    }
+
+  })
+  /* 추천 버튼 end */
+
+  /* 인기차트 */
+  function chart() {
+    fetch('/chart').then((res) => res.json()).then((data) => {
+      let rows = data['result']
+      console.log(rows)
+      let i = 1
+      rows.forEach((a) => {
+        let url = a['youtube_url']
+        let music = a['music']
+        let artist = a['artist']
+        let like = a['like']
+        $(`#music${i}`).text(music);
+        $(`#artist${i}`).text(artist);
+        $(`#like${i}`).text(like);
+        i = i + 1
+      })
+    })
+
+  }
+
+  /* 인기차트 end */
+
+  //카테고리 기능 + 장르별로 정보 가져오기
+  $(function () {
+    /* 스피너 */
+    var spinner = document.getElementById('spinner');
+    spinner.style.visibility = 'hidden';
+    var spinner_text = document.getElementById('spinner_text');
+    spinner_text.style.visibility = 'hidden';
+    /* 스피너 end */
+    listing();
+    chart();
+  });
+
+
+  /* db 정보 가져와서 보여주는 listing함수(GET요청) */
+  function listing() {
+    fetch('/smm').then((res) => res.json()).then((data) => {
+
+      let rows = JSON.parse(data['result'])
+      $('#cards-box').empty()
+
+      rows.reverse().forEach((a) => {
+        let url = a['youtube_url']
+        let music = a['music'] //곡이름
+        let artist = a['artist']
+        let sort = a['sort'] //장르
+        let star = a['star']
+        let comment = a['comment']
+        let like = a['like']
+        let _id = a['_id']['$oid']
+
+        let star_repeat = '⭐'.repeat(star)
+
+        let cache_html = `<div class="col">
+                        <div class="card h-100">
+                          <iframe width=auto height=auto src="//www.youtube.com/embed/${url}"
+                          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+                          clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                          <div class="card-body">
+                              <h5 class="card-title"><b>${music}</b></h5>
+                            <p class="artist-card">${artist}</p>
+                            <p class="genre">${sort}</p>
+                            <p>${star_repeat}</p>
+                            <p>${comment}</p>
+                          </div>
+                          <div>
+                            <p class="like">${like}</p><img class="like-button" name="like_img" id="${_id}" src="../static/img/thumbup.svg">
+                          </div>
+                        </div>
+                      </div>`
+
+        $('#cards-box').append(cache_html)
+      })
+    })
+  }
+
+  /* Categorizing */
+
+  class Sort {
+    constructor(sort_name) {
+      this.sort_name = sort_name;
+    }
+    run() {
+      fetch('/music').then((res) => res.json()).then((data) => {
+        let rows2 = data[this.sort_name];
+
+        $('#cards-box').empty()
+        rows2.forEach((a) => {
+          let url = a['youtube_url'];
+          let music = a['music'];
+          let artist = a['artist'];
+          let sort = a['sort'];
+          let star = a['star'];
+          let comment = a['comment'];
+          let like = a['like'];
+
+          let star_repeat = '⭐'.repeat(star);
+
+          let temp_html = `<div class="col">
+                            <div class="card h-100">
+                              <iframe width=auto height=auto src="//www.youtube.com/embed/${url}"
+                              title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+                              clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                              <div class="card-body">
+                                  <h5 class="card-title"><b>${music}</b></h5>
+                                <p class="artist">${artist}</p>
+                                <p class="genre">${sort}</p>
+                                <p>${star_repeat}</p>
+                                <p>${comment}</p>
+                              </div>
+                              <div>
+                                <p class="like">${like}</p><a onclick="like()"><img class="like-button" src="../static/img/thumbup.svg"></a>
+                              </div>
+                            </div>
+                          </div>`
+          $('#cards-box').append(temp_html)
+        })
+      })
+    }
+  }
+
+  var recommend = new Sort('result')
+  var indi = new Sort('result2')
+  var balad = new Sort('result3')
+  var dance = new Sort('result4')
+  var hiphop = new Sort('result5')
+  var pop = new Sort('result6')
+  var rock = new Sort('result7')
+
+  /* Categorizing end */
+
+
+
+
+  /* 글쓰기 버튼 누르면 나오는 모달 창 스크립트 */
+  function posting() {
+    let youtube_url = $('#youtube_url').val()
+    let music = $('#title').val()
+    let artist = $('#artist').val()
+    let sort = $('#genre').val()
+    let star = $('#star').val()
+    let comment = $('#comment').val()
+
+    let formData = new FormData();
+    formData.append("youtube_url_give", youtube_url);
+    formData.append("music_give", music);
+    formData.append("artist_give", artist);
+    formData.append("sort_give", sort);
+    formData.append("star_give", star);
+    formData.append("comment_give", comment);
+
+    fetch('/write_main', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
+      alert(data['msg'])
+      window.location.reload()
+    })
+  }
+
+
+  /* 글쓰기 모달창에서 유튜브 주소 입력 후 확인 버튼 누르면 실행되는 check_youtube_url함수 - 빈공간에 <iframe>태그 리턴 */
+  function check_youtube_url() {
+    let url = $('#youtube_url').val()
+    let formData = new FormData();
+    spinner.style.visibility = 'visible';
+    spinner_text.style.visibility = 'visible';
+    formData.append("youtube_url_give", url);
+    fetch('/write', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
+      if (data['receive'] === 'error') {
+        alert('유튜브 주소를 다시 확인해주세요.\n공식 뮤비 주소여야 잘 돼요!');
+        spinner.style.visibility = 'hidden';
+        spinner_text.style.visibility = 'hidden';
+      } else{
+        console.log(data)
+        html_cache = `
+              <iframe width="500" height="280" src="//www.youtube.com/embed/${data['receive']['url']}"
+              title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+              clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+        $('#youtube_embed').empty()
+        $('#youtube_embed').append(html_cache)
+  
+        document.getElementById("title").value = data['receive']['music'];
+        document.getElementById("artist").value = data['receive']['artist'];
+        spinner.style.visibility = 'hidden';
+        spinner_text.style.visibility = 'hidden';
+      }
+
+    })
+  }
+
+
+</script>
+
+
+
+<body>
+  <!--글쓰기 버튼 누르면 나오는 모달창 html-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="form-div" id="form">
+          <br>
+          <h1 style="text-align:center;">포스팅하기</h1>
+          <br>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="youtube_url" placeholder="https://youtu.be/@@@@"
+              aria-label="youtube url" aria-describedby="button-addon2" required>
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+              onclick="check_youtube_url()">확인</button>
+          </div>
+          <div class="youtube-cover">
+            <div class="d-flex justify-content-center loading">
+              <div class="spinner spinner-border text-primary" id="spinner" role="status">
+              </div>
+              <span class="text-primary" style="font-size:16px; margin-right:10px; font-weight:bold; line-height:25px; margin-left: 10px" id="spinner_text">크롤링중...</span>
+            </div>
+            <div style="width:500px; height:280px" id="youtube_embed" class="youtubes">
+            </div>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">제목과 아티스트</span>
+            <input type="text" aria-label="title" class="form-control" placeholder="곡 제목" id="title" required>
+            <input type="text" aria-label="artist" class="form-control" placeholder="아티스트명" id="artist" required>
+          </div>
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="genre">장르</label>
+            <select class="form-select" id="genre" required>
+              <option value="" selected>--선택하기--</option>
+              <option value="인디">인디 (Indipendent)</option>
+              <option value="발라드">발라드 (Ballad)</option>
+              <option value="댄스">댄스 (Dance)</option>
+              <option value="힙합">힙합 (HipHop)</option>
+              <option value="팝송">팝송 (Pop)</option>
+              <option value="락">락 (rock)</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="star">별점</label>
+            <select class="form-select" id="star" required>
+              <option value="" selected>--선택하기--</option>
+              <option value="1">⭐</option>
+              <option value="2">⭐⭐</option>
+              <option value="3">⭐⭐⭐</option>
+              <option value="4">⭐⭐⭐⭐</option>
+              <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">코멘트</span>
+            <textarea class="form-control" aria-label="comment" placeholder="감상을 적어주세요!" id="comment" required></textarea>
+          </div>
+          <br>
+          <div class="mybtns" style="display: inline-block; margin: 0 5px; float: right">
+            <button onclick="posting()" type="button" class="btn btn-dark">글쓰기</button>
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">돌아가기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 모달창 html end -->
+  <header>
+    <!--로고-->
+    <a onclick="location.href='/'" class="header-logo"><img src="../static/img/main_img.png" id="logo-img"></a>
+
+    <!-- 글쓰기 버튼 -->
+    <div class="header-btn">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        data-bs-whatever="@mdo">글쓰기</button>
+    </div>
+  </header>
+
+  <!-- 메인 페이지 '섹션' -->
+  <section>
+    <!-- section, nav cover html -->
+    <div class="wrap">
+      <!-- section html -->
+      <div class="section">
+        <!-- contents card html -->
+        <div class="mycards">
+          <div class="row row-cols-1 row-cols-md-3 g-4 " id="cards-box">
+          </div>
+        </div>
+        <!-- contents card html end -->
+      </div>
+      <!-- section html end-->
+
+      <!-- nav html -->
+      <div class="nav">
+        <!-- categorizing -->
+        <div class="sidebar">
+          <div class="sidebar_title">
+            <h2 style="font-size: 26px; color:red">CATEGORY</h2>
+          </div>
+          <div class="sidebar_content">
+            <div style="font-size: 24px; color:#e6e6e6"><a onclick="recommend.run()">추천곡</div>
+            <div style="font-size: 24px; color:#e6e6e6"><a onclick="indi.run()">인디</a></div>
+            <div style="font-size: 24px; color:#e6e6e6"><a onclick="balad.run()">발라드</a></div>
+            <div style="font-size: 24px; color:#e6e6e6"><a onclick="dance.run()">댄스</a></div>
+            <div style="font-size: 24px; color:#e6e6e6"><a onclick="hiphop.run()">힙합</a></div>
+            <div style="font-size: 24px; color:#e6e6e6"><a onclick="pop.run()">팝송</a></div>
+            <div style="font-size: 24px; color:#e6e6e6"><a onclick="rock.run()">락</a></div>
+          </div>
+        </div>
+
+        <!-- categorizing end -->
+
+        <!--Ranking System-->
+        <div class="ranking_system">
+          <div class="rank_cover">
+            <div class="rank_title">
+              <h2 style="font-size: 26px; color:#e6e6e6">인기차트</h2>
+            </div>
+            <div class="rank_main">
+              <div class="rank_list">
+                <li class="rank_each"><span class="rank rank-top-one">1</span>
+                  <div class="song-cover">
+                    <span class="song" id="music1"></span>
+                    <span class="artist" id="artist1"></span>
+                  </div>
+                  <div class="chart-like-cover">
+                    <span class="chart-like" id="like1"></span>
+                  </div>
+                </li>
+                <li class="rank_each"><span class="rank rank-top">2</span>
+                  <div class="song-cover">
+                    <span class="song" id="music2"></span>
+                    <span class="artist" id="artist2"></span>
+                  </div>
+                  <div class="chart-like-cover">
+                    <span class="chart-like" id="like2"></span>
+                  </div>
+                </li>
+                <li class="rank_each"><span class="rank rank-top">3</span>
+                  <div class="song-cover">
+                    <span class="song" id="music3"></span>
+                    <span class="artist" id="artist3"></span>
+                  </div>
+                  <div class="chart-like-cover">
+                    <span class="chart-like" id="like3"></span>
+                  </div>
+                </li>
+                <li class="rank_each"><span class="rank">4</span>
+                  <div class="song-cover">
+                    <span class="song" id="music4"></span>
+                    <span class="artist" id="artist4"></span>
+                  </div>
+                  <div class="chart-like-cover">
+                    <span class="chart-like" id="like4"></span>
+                  </div>
+                </li>
+                <li class="rank_each"><span class="rank">5</span>
+                  <div class="song-cover">
+                    <span class="song" id="music5"></span>
+                    <span class="artist" id="artist5"></span>
+                  </div>
+                  <div class="chart-like-cover">
+                    <span class="chart-like" id="like5"></span>
+                  </div>
+                </li>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Ranking System end -->
+      </div>
+      <!-- nav html end -->
+    </div>
+  </section>
+  <!-- 메인 페이지 '섹션' end -->
+  <!-- section, nav cover html -->
+
+</body>
+
+</html>
